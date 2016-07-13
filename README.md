@@ -1,29 +1,18 @@
-# Backend Bowl
+# Backend Swapped (MEAN - MongoDB, Express.js, Angular.js, Node.js)
 
-### Coisas úteis
+###Coisas uteis:
+    ssh-add path/to/privateEC2key.pem
+    depois só: 
+    ssh ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
+    ssh -N -L 8888:127.0.0.1:80 ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
+    Url pro repo na maquina da amazon:
+    ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com:~/apps/backend.git
+    ssh -i TCC-Backend/resources/tcc.pem ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
+    ssh -N -L 8888:127.0.0.1:80 -i TCC-Backend/resources/tcc.pem ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
 
-    Developer:
-    Public DNS: ec2-54-210-71-210.compute-1.amazonaws.com
-    AWS: ssh -i BackendBootstrap.pem ubuntu@ec2-54-210-71-210.compute-1.amazonaws.com
-
-    Production:
-    Public DNS: ec2-52-201-135-248.compute-1.amazonaws.com
-    AWS: ssh -N -L 8888:127.0.0.1:80 -i InterUSP.pem ubuntu@ec2-52-201-135-248.compute-1.amazonaws.com
-
-    Url admin:
-    http://ec2-52-201-135-248.compute-1.amazonaws.com:8080/
-###[RockMongo](http://127.0.0.1:8888/rockmongo/index.php?action=login.index&host=0): 
- 
-    ssh -N -L 8888:127.0.0.1:80 -i BackendBootstrap.pem ubuntu@ec2-54-210-71-210.compute-1.amazonaws.com
-
-    ssh -N -L 8888:127.0.0.1:80 ubuntu@ec2-54-210-71-210.compute-1.amazonaws.com
+###Tutorial base:
    
-    http://127.0.0.1:8888/rockmongo/index.php?action=login.index&host=0
- 
-    user: Appsimples
-    senha: amazonapp123654
-
-  
+   https://scotch.io/tutorials/deploying-a-mean-app-to-amazon-ec2-part-1
 ## Instalação
 
 Dê clone no repositório e execute `npm install` na pasta do projeto para 
@@ -92,9 +81,12 @@ com Homebrew
 ### Se for realmente gravado aparecerá a seguinte mensagem:
 
     WriteResult({ "nInserted" : 1 })
-### Na pasta do projeto do backend, execute:
+###Para definir o db a ser usado vá no arquivo config.js e nomeie o db do projeto:
+    exports.mongoURI = 'mongodb://localhost/tcc';
 
-    node app.js
+### Vá para a pasta do projeto do backend e execute o servidor:
+
+    node app.js ou nodemon
 ### Se o servidor realmente estiver rodando aparecerá a seguinte mensagem avisando a porta do servidor:
 
     Express server listening on port 3000
@@ -193,18 +185,19 @@ Utilizamos o modulo https://nodemailer.com/
 
 ### Credenciais MongoDB
 
-    admins:
+    admins mongo (acesso a todo o mongoDB):
 
      User: root
-     Password: SSSvGALha2Br
+     Password: qzAlt35ARo0e
 
      User: appsimples
      Password: amazonapp123654
 
-    banco backendBootstrap:
+    adminsDB (só acesso a um ou mais dbs especificos):
 
      User: backendBootstrap
      Password: amazonapp123654
+     DB Name(s): backendBootstrap
 
 ### Acessar o banco
 
@@ -215,14 +208,21 @@ Utilizamos o modulo https://nodemailer.com/
     sudo bash ctlscript.sh restart mongodb
 
 ### Acessando o server na Amazon via SSH:
-    
+
+### Public DNS (URL de acesso remoto)
+
+    ec2-52-38-92-76.us-west-2.compute.amazonaws.com
+    (muda toda vez que reiniciamos a máquina da AWS)
+
 ### Crie uma permissão de acesso da sua máquina, execute o aquivo .pem (apenas a primeira vez):
     
-    chmod 400 **path para projeto**/resources/ConceitoA.pem
+    chmod 400 **path para projeto**/resources/**tcc**.pem
     
-### Acesse a máquina, execute o arquivo .pem e coloque a url da amazon:
+### Acesse a máquina, execute o arquivo .pem e coloque a url da amazon(repare no ubuntu@):
     
-    ssh -i **path para projeto**/resources/**BackendBootstrap**.pem ubuntu@ec2-54-210-71-210.compute-1.amazonaws.com
+    ssh -i **path para projeto**/resources/**tcc**.pem ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
+
+    ssh -i TCC-backend/resources/tcc.pem ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
 
 ### Caso a máquina foi acessada com sucesso a seguinte mensagem aparecerá:
 
@@ -240,7 +240,7 @@ Utilizamos o modulo https://nodemailer.com/
 
 ### Entra na pasta do projeto:
 
-    cd apps/swapped
+    cd apps/backend
 
 ### Para atualizar o projeto basta dar um pull do repositório remoto
   
@@ -249,25 +249,62 @@ Utilizamos o modulo https://nodemailer.com/
 ### Depois de atualiza o projeto rode o projeto na AWS
 O projeto usa forever.js para rodar o script continuamente na máquina, mesmo após você terminar sua sessão (https://github.com/foreverjs/forever) vá na pasta do projeto:
 
-    forever start app.js
-
-### Public DNS (URL de acesso remoto)
-
-    ec2-54-210-71-210.compute-1.amazonaws.com
-    (muda toda vez que reiniciamos a máquina da AWS)
+    forever start app.js - cria o server 
+    forever restart - reinicia o server
+    forever stopall - fecha todas os app.js 
+    forever logs app.js (loga sempre)
 
 ### GUI Banco de dados - Rockmongo
 
-    para acessar vá na sua maquina:
-      ssh -N -L 8888:127.0.0.1:80 -i *path para projeto*/resources/ConceitoA.pem ubuntu@ec2-52-0-86-117.compute-1.amazonaws.com
+    para acessar vá na sua maquina(repare no ubuntu@):
+      ssh -N -L 8888:127.0.0.1:80 -i TCC-Backend/resources/tcc.pem ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
    obs: nao vai mostrar nenhum resultado no terminal
 
     acesse: http://127.0.0.1:8888/rockmongo
-## Credenciais de acesso S3
+### Criar end point
 
-Access Key ID: AKIAJ7CRDDV6OIRPX7PA
-Secret Access Key: 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
+    Arquivos que devem ser criados:
+    models
+     operation.js -> Schema da tabela no bd
+    modules
+     operation-controller.js -> Algoritmo do end point (Crud no bd, além de qualquer manipulacao dos dados)
+    routes
+     opertaion.js -> Criaçao da rota, liga a url com o controller. Seta-se o metodo(post,get..).
+    server.js -> Importa o schema da tabela
+              -> Cria o modulo
+              -> Cria a rota e passa sua dependencia(modulo)
 
-## passphrase ssh da maquina Bowl/interusp
 
-amazonapp123654
+
+
+
+
+https://confluence.atlassian.com/bitbucket/set-up-ssh-for-git-728138079.html
+
+sudo chown -R ubuntu .git - na pasta do projeto
+
+nuca mais sudo
+
+colocar senha que voce gerou no isa
+
+git remote set-url origin "SSH git link"
+
+nao precisa ligar e desligar o server: nodemon
+
+### Iterm2 + ohmyzhs
+
+    Instale o homebrew, cole esse comando no terminal:
+     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    Instale o zsh, cole esse comando no terminal:
+     brew install zsh zsh-completions
+  
+    Instale o oh-my-zsh, cole esse comando no terminal:
+     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
+    Caso ele nao mude sozinho pra nova shell, faça manualmente:
+     chsh -s /usr/local/bin/zsh
+
+    Caso de algum erro de permissao veja se voce é dono dos arquivos:
+     pra ver se vc é dono --> ls -al
+     pra se tornar dono --> sudo chown -R yourusername:staff .oh-my-zsh .zs .zsh*
