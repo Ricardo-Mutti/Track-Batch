@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="BowlApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bowl - ADMIN</title>
+    <!-- CSS3 link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bowl.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/fontawesome/css/font-awesome.min.css">
+    <!-- JS and AngularJS -->
+    <script src="assets/js/lib/angular/angular.min.js"></script>
+    <script src="assets/js/lib/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="assets/js/lib/angular-route/angular-route.js"></script>
+    <script src="assets/js/lib/satellizer.js"></script>
+    <script src="assets/js/lib/angular-s3.js"></script>
+    <script src="assets/js/lib/angular-md5.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/directives.js"></script>
+    <script src="assets/js/controllers.js"></script>
+    <script src="assets/js/services.js"></script>
+</head>
+
+<body>
+    <main class="new_grid_form" ng-controller="AdicionarCategoriaController as addcat">
+        <section class="list_categories">
+            <a href="" ng-click="back()">
+                <i class="fa fa-arrow-left arrow_logout" aria-hidden="true"></i>
+                <p class="label_logout">Back</p>
+            </a>
+            <h1 class="title_form">Current Categories</h1>
+            <form accept-charset="utf-8" class="new_category_form">
+                <input type="text" ng-model="category.name" placeholder="New category" value="">
+                <input type="submit" value="Add" ng-click="addCategory(category)">
+            </form>
+            <article class="show_items" ng-repeat="list in categories">
+                <p class="label_category">{{list.name}}</p>
+                <a href="" class=" click_delete" ng-click="remove(this)">
+                    <i class="fa fa-minus-circle fa-2x delete_icon" aria-hidden="true"></i>
+                </a>
+                <div class="hr_line"></div>
+            </article>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html ng-app="BowlApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bowl - ADMIN</title>
+    <!-- CSS3 link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bowl.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/fontawesome/css/font-awesome.min.css">
+    <!-- JS and AngularJS -->
+    <script src="assets/js/lib/angular/angular.min.js"></script>
+    <script src="assets/js/lib/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="assets/js/lib/angular-route/angular-route.js"></script>
+    <script src="assets/js/lib/satellizer.js"></script>
+    <script src="assets/js/lib/angular-s3.js"></script>
+    <script src="assets/js/lib/angular-md5.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/directives.js"></script>
+    <script src="assets/js/controllers.js"></script>
+    <script src="assets/js/services.js"></script>
+</head>
+
+<body>
+    <section class="list_video" ng-controller="ListaController as lista">
+        <header class="header_main">
+            <a href="" ng-click="logout()">
+                <i class="fa fa-arrow-left arrow_logout" aria-hidden="true"></i>
+                <p class="label_logout">Logout</p>
+            </a>
+                <h2 class="title_main">Admin Bowl</h2>
+            <a href="novo_video" class="add_container left_side">
+                <i class="fa fa-plus-circle fa-2x plus_icon" aria-hidden="true"></i>
+                <p class="plus_icon_text">Incluir novo v&iacute;deo</p>
+            </a>
+            <a href="adicionar_categoria" class="add_container right_side">
+                <i class="fa fa-plus-circle fa-2x plus_icon" aria-hidden="true"></i>
+                <p class="plus_icon_text">Categorias</p>
+            </a>
+        </header>
+        <aside class="list_header">
+            <article class="title_header grid_x2">
+                <h3 class="title_text">Title</h3>
+            </article>
+            <article class="title_header grid_y1">
+                <h3 class="title_text">URL</h3>
+            </article>
+            <article class="title_header grid_x2">
+                <h3 class="title_text">Description</h3>
+            </article>
+            <article class="title_header grid_x1">
+                <h3 class="title_text">Views</h3>
+            </article>
+            <article class="title_header grid_x1">
+                <h3 class="title_text">Likes</h3>
+            </article>
+            <article class="title_header grid_x1">
+                <h3 class="title_text">Comments</h3>
+            </article>
+            <article class="title_header grid_x1">
+                <h3 class="title_text">Categories</h3>
+            </article>
+            <article class="title_header grid_x1">
+                <h3 class="title_text">Source</h3>
+            </article>
+            <article class="title_header grid_x1">
+                <h3 class="title_text">Date</h3>
+            </article>
+            <article class="title_header grid_x1 grid_support">
+                <h3 class="title_text"></h3>
+            </article>
+        </aside>
+        <main ng-repeat="list in lista.feed | orderBy:'postDate':true">
+            <div class="hr_line"></div>
+            <section class="list_items">
+                <article class="title_header grid_x2">
+                    <p class="title_text title_padding_descrp">{{list.nome}}</p>
+                </article>
+                <article class="title_header grid_y1">
+                    <p class="title_text">{{list.videoUrl}}</p>
+                </article>
+                <article class="title_header grid_x2">
+                    <p class="title_text">{{list.descricao}}</p>
+                </article>
+                <article class="title_header grid_x1">
+                    <p class="title_text">{{list.views}}</p>
+                </article>
+                <article class="title_header grid_x1">
+                    <p class="title_text">{{list.likes}}</p>
+                </article>
+                <article class="title_header grid_x1">
+                    <p class="title_text">{{list.commentUsers.length}}</p>
+                </article>
+                <article class="title_header grid_x1">
+                    <p class="title_text centralize" ng-repeat="cat in list.categories_name">{{cat}}</p>
+                </article>
+                <article class="title_header grid_x1">
+                    <p class="title_text">{{list.source}}</p>
+                </article>
+                <article class="title_header grid_x1">
+                    <p class="title_text">{{list.postDate | date:'dd/MM/yyyy'}}</p>
+                </article>
+                <article class="title_header grid_x1 grid_support">
+                    <a href="" class="grid_items" ng-click="deletePost(this)">
+                        <i class="fa fa-minus-circle fa-1x icon_items" aria-hidden="true"></i>
+                    </a>
+                    <a href="" class="grid_items" ng-click="update(this)">
+                        <i class="fa fa-pencil fa-1x icon_items" aria-hidden="true"></i>
+                    </a>
+                </article>
+            </section>
+        </main>
+        <div class="hr_line"></div>
+    </section>
+</body>
+
+</html>

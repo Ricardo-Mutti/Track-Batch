@@ -1,0 +1,28 @@
+{
+  "name": "Backend-Bowl",
+  "version": "1.0.0",
+  "description": "Backend para os aplicativos Android e IOS do Bowl",
+  "main": "app.js",
+  "scripts": {
+  },
+  "author": "Rafael Camargos Santos (rafaelcamargossanto), Matheus Freitas Venosa",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "cradle": "^0.6.9",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "method-override": "^2.3.5",
+    "mongodb": "^2.0.0",
+    "morgan": "^1.6.1",
+    "mysql": "^2.9.0",
+    "nodemon": "^1.9.1",
+    "bcryptjs":"^2.3.0",
+    "jsonwebtoken":"^5.7.0",
+    "mongoose":"^4.4.10",
+    "nodemailer":"^2.3.2",
+    "satellizer":"^0.14.0",
+    "request":"^2.72.0"
+  }
+}
+
