@@ -15,7 +15,7 @@ module.exports = function(nodeMailer) {
 
 		mongoURI : function(){
 			if (env === 'development') {
-				return 'mongodb://bowl:bowl@ec2-54-210-71-210.compute-1.amazonaws.com:27017/bowl';
+				return 'mongodb://tcc:tcc@ec2-52-38-92-76.us-west-2.compute.amazonaws.com:27017/tcc';
 			}
 
 			// production only
