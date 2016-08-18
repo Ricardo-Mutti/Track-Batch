@@ -5,9 +5,8 @@ module.exports = function(mongoose){
 	var accountSchema = new Schema({
 		username: String,
 		password: String,
-	    facebook_id: String,
 	    email: String,
-	    admin: Boolean
+	    role: Boolean
 	});
 
 	return mongoose.model('Account', accountSchema);
