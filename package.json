@@ -1,11 +1,11 @@
 {
   "name": "Backend-Bowl",
   "version": "1.0.0",
-  "description": "Backend para os aplicativos Android e IOS do Bowl",
+  "description": "Backend for course conclusion work Polytechinic of São Paulo",
   "main": "app.js",
   "scripts": {
   },
-  "author": "Rafael Camargos Santos (rafaelcamargossanto), Matheus Freitas Venosa",
+  "author": "Ricardo Mutti (Ricardo-Mutti), Luis Parma Pires",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.13.3",

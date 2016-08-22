@@ -12,16 +12,6 @@ app.use(server.app.methodOverride());
 
 server.router(app);
 
-// verify connection configuration
-var transporter = server.app.config.transporter();
-transporter.verify(function(error, success) {
-   if (error) {
-        console.log(error);
-   } else {
-        console.log('Email connection live');
-   }
-});
-
 return server.app.http.createServer(app).listen(process.env.PORT || 8080, function() {
     console.log("Server is on, listening on: 8080");
 });
