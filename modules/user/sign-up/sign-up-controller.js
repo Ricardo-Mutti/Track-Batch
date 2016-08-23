@@ -48,7 +48,7 @@ module.exports = function (schema, bcrypt, jwt, config){
 
     changePassword: function(req, res){
       var query = {};
-      console.log("ta aqui");
+      // console.log("ta aqui");
       if (req.body.email){
         query.email = req.body.email;
         Account.findOne(query, function(err,acc){

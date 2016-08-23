@@ -1,7 +1,7 @@
 {
-  "name": "Backend-Bowl",
+  "name": "Backend-TCC",
   "version": "1.0.0",
-  "description": "Backend for course conclusion work Polytechinic of São Paulo",
+  "description": "Backend for course conclusion work - Polytechinic of São Paulo 2016",
   "main": "app.js",
   "scripts": {
   },

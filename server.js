@@ -38,6 +38,12 @@ module.exports = function(){
   var schema = {};
   schema.account = require(__dirname + '/models/account.js')(db.mongoose);
   schema.user = require(__dirname + '/models/user.js')(db.mongoose);
+  schema.machine = require(__dirname + '/models/machine.js')(db.mongoose);
+
+  //Modulo authenticate
+  var authenticate = {};
+  authenticate.controllers = {};
+  authenticate.controllers.authenticate = require(__dirname + '/modules/authenticate/authenticate-controller.js')(app.jwt, app.config);
 
   //Modulo User
   var user = {};
@@ -46,11 +52,23 @@ module.exports = function(){
   user.controllers.login = require(__dirname + '/modules/user/login/login-controller.js')(schema, app.bcrypt,app.jwt, app.config);
   user.controllers.user = require(__dirname + '/modules/user/user-controller.js')(schema);
 
+  //Modulo machine
+  var machine = {};
+  machine.controllers = {};
+  machine.controllers = require(__dirname + '/modules/machine/machine-controller.js')(schema);
+
   //Rotas
   var routes = {};
-  routes.routes = require(__dirname + '/routes/router.js')(app.express, routes);
-  routes.v1 = {};
-  routes.v1.user = require(__dirname + '/routes/v1/user-route.js')(user);
+  routes.routes = require(__dirname + '/routes/router.js')(app.express, routes, authenticate);
+  routes.v1_auth = {};
+  routes.v1_no_auth = {};
+
+  //Rotas v1-no-auth
+  routes.v1_no_auth.account = require(__dirname + '/routes/v1-no-auth/account-route.js')(user);
+
+  //Rotas v1-auth  
+  routes.v1_auth.user = require(__dirname + '/routes/v1-auth/user-route.js')(user);
+  routes.v1_auth.machine = require(__dirname + '/routes/v1-auth/machine-route.js')(machine);
 
    return {
     app: app,
