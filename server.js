@@ -39,6 +39,9 @@ module.exports = function(){
   schema.account = require(__dirname + '/models/account.js')(db.mongoose);
   schema.user = require(__dirname + '/models/user.js')(db.mongoose);
   schema.machine = require(__dirname + '/models/machine.js')(db.mongoose);
+  schema.po = require(__dirname + '/models/po.js')(db.mongoose);
+  schema.batch = require(__dirname + '/models/batch.js')(db.mongoose);
+  schema.product = require(__dirname + '/models/product.js')(db.mongoose);
 
   //Modulo authenticate
   var authenticate = {};
@@ -57,6 +60,16 @@ module.exports = function(){
   machine.controllers = {};
   machine.controllers = require(__dirname + '/modules/machine/machine-controller.js')(schema);
 
+  //Modulo PO
+  var PO = {};
+  PO.controllers = {};
+  PO.controllers = require(__dirname + '/modules/PO/po-controller.js')(schema);
+
+  //Modulo Product
+  var product = {};
+  product.controllers = {};
+  product.controllers = require(__dirname + '/modules/product/product-controller.js')(schema);
+
   //Rotas
   var routes = {};
   routes.routes = require(__dirname + '/routes/router.js')(app.express, routes, authenticate);
@@ -69,6 +82,8 @@ module.exports = function(){
   //Rotas v1-auth  
   routes.v1_auth.user = require(__dirname + '/routes/v1-auth/user-route.js')(user);
   routes.v1_auth.machine = require(__dirname + '/routes/v1-auth/machine-route.js')(machine);
+  routes.v1_auth.po = require(__dirname + '/routes/v1-auth/po-route.js')(PO);
+  routes.v1_auth.product = require(__dirname + '/routes/v1-auth/product-route.js')(product);
 
    return {
     app: app,
