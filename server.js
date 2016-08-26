@@ -70,6 +70,11 @@ module.exports = function(){
   product.controllers = {};
   product.controllers = require(__dirname + '/modules/product/product-controller.js')(schema);
 
+  //Modulo Batch
+  var batch = {};
+  batch.controllers = {};
+  batch.controllers = require(__dirname + '/modules/batch/batch-controller.js')(schema);
+
   //Rotas
   var routes = {};
   routes.routes = require(__dirname + '/routes/router.js')(app.express, routes, authenticate);
@@ -84,6 +89,7 @@ module.exports = function(){
   routes.v1_auth.machine = require(__dirname + '/routes/v1-auth/machine-route.js')(machine);
   routes.v1_auth.po = require(__dirname + '/routes/v1-auth/po-route.js')(PO);
   routes.v1_auth.product = require(__dirname + '/routes/v1-auth/product-route.js')(product);
+  routes.v1_auth.batch = require(__dirname + '/routes/v1-auth/batch-route.js')(batch);
 
    return {
     app: app,

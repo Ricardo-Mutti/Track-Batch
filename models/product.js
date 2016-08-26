@@ -8,6 +8,7 @@ module.exports = function(mongoose){
 		imageUrl: String,
 		subProduct: [String],
 		activities: [String],
+		price: String,
 		ETC: String
 		
 	});
