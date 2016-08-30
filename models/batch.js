@@ -7,10 +7,11 @@ module.exports = function(mongoose){
 		productID: String,
 		POID: Schema.Types.ObjectId,
 		fabDate: Date,
-		currentMachine: String,
+		currentMachine: { type: String, default: 'none' },
 		duration: String,
 		activitiesTime: [String],
-		transportTime:[String]
+		transportTime:[String],
+		batchStatus: { type: String, default: 'onHold' } //onHold, ready, started, finish. (started = time between ready and first RFID read)
 		
 	});
 

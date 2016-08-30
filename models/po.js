@@ -7,10 +7,9 @@ module.exports = function(mongoose){
 		client: String,
 		orders:  [{
     		productID: String,
-			qnt: String,
-			status: { type: String, default: 'orded' } //orded, approved, started, inProgress, finish. (inProgess = time between started and first RFID read)
+			qnt: String
      	}],
-		date: Date
+		date: { type: Date, default: Date.now }
 		
 	});
 

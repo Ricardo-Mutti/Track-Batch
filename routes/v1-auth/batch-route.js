@@ -8,5 +8,11 @@ module.exports = function (moduleBatch){
     	controllers.getBatch(req, res);
 
     });
+
+    router.post("/register-batch", function(req, res){
+      controllers.registerBatch(req, res);
+
+    });
+
   }
 }

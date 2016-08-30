@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
   },
-  "author": "Ricardo Mutti (Ricardo-Mutti), Luis Parma Pires",
+  "author": "Ricardo Mutti (Ricardo-Mutti) and Luis Parma Pires",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.13.3",
