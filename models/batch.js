@@ -7,6 +7,7 @@ module.exports = function(mongoose){
 		productID: String,
 		POID: Schema.Types.ObjectId,
 		fabDate: Date,
+		firstMachine: String,
 		currentMachine: { type: String, default: 'none' },
 		duration: String,
 		activitiesTime: [String],

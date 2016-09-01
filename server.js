@@ -75,6 +75,11 @@ module.exports = function(){
   batch.controllers = {};
   batch.controllers = require(__dirname + '/modules/batch/batch-controller.js')(schema);
 
+  //Modulo Input
+  var input = {};
+  input.controllers = {};
+  input.controllers = require(__dirname + '/modules/input/input-controller.js')(schema);
+
   //Rotas
   var routes = {};
   routes.routes = require(__dirname + '/routes/router.js')(app.express, routes, authenticate);
@@ -83,6 +88,7 @@ module.exports = function(){
 
   //Rotas v1-no-auth
   routes.v1_no_auth.account = require(__dirname + '/routes/v1-no-auth/account-route.js')(user);
+  routes.v1_no_auth.input = require(__dirname + '/routes/v1-no-auth/input-route.js')(input);
 
   //Rotas v1-auth  
   routes.v1_auth.user = require(__dirname + '/routes/v1-auth/user-route.js')(user);

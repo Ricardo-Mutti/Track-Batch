@@ -4,28 +4,29 @@ module.exports = function (schema){
 
   return {
 
-    registerInput: function(req, res){
+    registerRFIDInput: function(req, res){
 
        var inputMachine = req.body.inputMachine;
        var inputDate = req.body.inputDate;
        var query = {};
        query.batchStatus = 'ready';
+       query.firstMachine = inputMachine;
 
-         Batch.find(function(err,batches){
-        if (err) throw err;
-          return res.json({success: true, message: 'Batches founded', response: {batches}});  
-       });
-
-
-          newBatch.save(function(err){
-          if (err) throw  err;
-          return res.json({success: true, message: 'Batch created', response: {newBatch}});
+       var update = {};
+       update.fabDate = inputDate;
+       update.currentMachine = inputMachine;
+       update.batchStatus = 'started';
+   
+        Batch.findOneAndUpdate(query, update, {new: true}, function(err, batch){
+          if (err) throw err;
+          if (batch){
+            return res.json({success: true, message: 'Batch Updated!', response: {batchUpdated: batch}});
+          }else return res.json({success: false, message: 'Batch not founded!'});
         })
     },
-    
-    getBatch: function(req, res){
 
-     
+
+
+
     }
   }
-}
