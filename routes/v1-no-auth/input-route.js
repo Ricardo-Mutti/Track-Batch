@@ -8,8 +8,8 @@ module.exports = function (moduleInput){
         controllers.registerRFIDInput(req, res);
     }); 
 
-     router.post("/register-input", function(req, res){
-        controllers.registerRFIDInput(req, res);
+     router.post("/register-operator-input", function(req, res){
+        controllers.registerOperatorInput(req, res);
     }); 
   }
 }
