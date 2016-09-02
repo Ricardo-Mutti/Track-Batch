@@ -6,10 +6,11 @@ module.exports = function(mongoose){
 
 		client: String,
 		orders:  [{
-    		productID: String,
+    		productName: String,
 			qnt: String
      	}],
-		date: { type: Date, default: Date.now }
+		date: { type: Date, default: Date.now },
+		POStatus: { type: String, default: 'orded' } //Status da PO -> orded or approved
 		
 	});
 

@@ -9,6 +9,11 @@ module.exports = function (moduleBatch){
 
     });
 
+     router.get("/get-finished-batch", function(req, res){
+    	controllers.getFinishedBatch(req, res);
+
+    });
+
     router.post("/register-batch", function(req, res){
       controllers.registerBatch(req, res);
 

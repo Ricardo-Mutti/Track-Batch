@@ -15,10 +15,20 @@ module.exports = function (schema){
     
     getBatch: function(req, res){
 
-       Batch.find(function(err,batches){
+       Batch.find( {'batchStatus': { $ne: 'finished' } },function(err,batches){
         if (err) throw err;
           return res.json({success: true, message: 'Batches founded', response: {batches}});  
        });
+    },
+
+    getFinishedBatch: function(req, res){
+
+       Batch.find( {'batchStatus': 'finished'},function(err,batches){
+        if (err) throw err;
+          return res.json({success: true, message: 'Finished batches founded', response: {batches}});  
+       });
     }
+
+
   }
 }

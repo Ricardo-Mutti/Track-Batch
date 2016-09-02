@@ -6,7 +6,10 @@ module.exports = function(mongoose){
 
 		productName: String,
 		imageUrl: String,
-		subProduct: [String],
+		subProduct: [{
+		  productName: String,
+	      qnt: String
+     	}],
 		activities: [String],
 		price: String,
 		ETC: String
