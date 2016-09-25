@@ -16,7 +16,9 @@
     Usuários do rockMongo
     User: root
     Password: qzAlt35ARo0e
-2.compute.amazonaws.com
+
+    Comando pra atualizar o usuário como manager:
+    db.users.update({"_id": ObjectId("57ba3298d46da4a923fba422")}, {$set: {"role": "manager"}})
 
 ###Tutorial base:
    
