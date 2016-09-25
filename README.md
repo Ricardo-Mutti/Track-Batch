@@ -1,6 +1,9 @@
 # Backend Swapped (MEAN - MongoDB, Express.js, Angular.js, Node.js)
 
 ###Coisas uteis:
+
+    Essa DNS sao do tcc mesmo
+
     ssh-add path/to/privateEC2key.pem
     depois só: 
     ssh ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
@@ -9,6 +12,11 @@
     ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com:~/apps/backend.git
     ssh -i TCC-Backend/resources/tcc.pem ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
     ssh -N -L 8888:127.0.0.1:80 -i TCC-Backend/resources/tcc.pem ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
+    
+    Usuários do rockMongo
+    User: root
+    Password: qzAlt35ARo0e
+2.compute.amazonaws.com
 
 ###Tutorial base:
    
