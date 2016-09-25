@@ -29,15 +29,9 @@ module.exports = function (schema, bcrypt, jwt, config){
 
     signUp: function(req, res){
 
-       Account.findOne({ $or: [{userName: req.body.userName}, {email: req.body.email}]}, function(err,acc){
+       Account.findOne({email: req.body.email}, function(err,acc){
         if(acc){
-            if (acc.userName == req.body.userName && acc.email == req.body.email){
-                return res.json({success: false, message: "This username and email already exists"});
-              }else if (acc.userName == req.body.userName){
-                return res.json({success: false, message: "This username already exists"});
-              }else{
-                return res.json({success: false, message: "This email already exists"});
-              }
+             return res.json({success: false, message: "This email already exists"});
         }else{
              var bodyacc = {email: req.body.email, userName: req.body.userName, password: req.body.password};
              var bodyuser = {userName: req.body.userName, email: req.body.email, phoneNumber: req.body.phoneNumber};

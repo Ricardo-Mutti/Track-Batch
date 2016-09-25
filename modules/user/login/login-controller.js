@@ -1,6 +1,7 @@
 module.exports = function (schema, bcrypt, jwt, config){//Aqui a gnt ta passando o schema do account, a biblioteca de criptografia, token e o arquivo config que contem a apiSecret pra gerar o token
 
   var Account = schema.account;
+  var User = schema.user;
   const saltRounds = 4;
 
   return {
@@ -25,12 +26,17 @@ module.exports = function (schema, bcrypt, jwt, config){//Aqui a gnt ta passando
               // account e password batem
               // cria token
               var token = jwt.sign(account.toObject(), config.apiSecret());
-
-              return res.json({
-                success : true,
-                message : 'sucesso no login.',
-                token : token
-              });
+              User.findOne(query, function(err, user){
+               if (err) throw err;
+               if (user){
+                    return res.json({
+                    success : true,
+                    message : 'sucesso no login.',
+                    response: {token : token, user: user}
+                 });
+                }else return res.json({success: false, message: 'User not find!'});
+              })
+                
           }
         });
        }

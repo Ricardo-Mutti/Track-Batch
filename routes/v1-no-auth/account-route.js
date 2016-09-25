@@ -8,8 +8,6 @@ module.exports = function (moduleUser){
         controllers.signUp.signUp(req, res);
     });
 
-
-
     router.post("/login", function(req, res){
         controllers.login.post(req, res);
     });
