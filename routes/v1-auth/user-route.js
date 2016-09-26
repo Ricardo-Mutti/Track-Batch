@@ -8,7 +8,7 @@ module.exports = function (moduleUser){
     	controllers.signUp.changePassword(req, res);
     });
 
-    router.post("/get-user", function(req, res){
+    router.get("/get-user", function(req, res){
     	controllers.user.getUser(req, res);
     });
 

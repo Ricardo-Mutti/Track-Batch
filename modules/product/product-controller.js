@@ -6,18 +6,37 @@ module.exports = function (schema){
     registerProduct: function(req, res){
 
        var newProduct = new Product(req.body);
-
+  
+        Product.findOne({productName: newProduct.productName}, function(err,product){
+        if (err){
+         return res.json({status: 500, error: err});
+         }
+        if(product){
+          return res.json({success: false, message: "This product is already registered"});
+        }else{
           newProduct.save(function(err){
-          if (err) throw  err;
-          return res.json({success: true, message: 'Product registered', response: {newProduct}});
+        if (err){
+         return res.json({status: 500, error: err});
+         }
+          return res.json({success: true, message: 'New Product registered', response: {newProduct}});
         })
+         }
+       });
     },
     
     getProduct: function(req, res){
 
-       Product.find(function(err,products){
+       Product.find({"type": "photo"}, function(err,products){
         if (err) throw err;
           return res.json({success: true, message: 'Products founded', response: {products}});  
+       });
+    },
+
+    getBlueprints: function(req, res){
+
+       Product.find({"type": "blueprint"}, function(err,products){
+        if (err) throw err;
+          return res.json({success: true, message: 'Blueprints founded', response: {products}});  
        });
     },
 
@@ -34,6 +53,9 @@ module.exports = function (schema){
         })
       }else return res.json({success: false, message: 'Missing parameters!'});
     }
+
+
+
   }
 }
 

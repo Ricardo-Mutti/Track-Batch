@@ -10,7 +10,7 @@ module.exports = function(mongoose){
 			qnt: String
      	}],
 		date: { type: Date, default: Date.now },
-		POStatus: { type: String, default: 'orded' } //Status da PO -> orded or approved
+		POStatus: { type: String, default: 'orded' } //Status da PO -> orded, approved, done
 		
 	});
 

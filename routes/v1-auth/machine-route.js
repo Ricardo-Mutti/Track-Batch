@@ -7,8 +7,9 @@ module.exports = function (moduleMachine){
     	controllers.registerMachine(req, res);
     });
 
-     router.post("/get-machine", function(req, res){
-    	controllers.getMachine(req, res);
+    router.get("/get-machine-list", function(req, res){
+    	controllers.getMachineList(req, res);
     });
+
   }
 }

@@ -11,8 +11,20 @@ module.exports = function (modulePO){
     	controllers.approvePO(req, res);
     });
 
-     router.get("/get-po", function(req, res){
-    	controllers.getPO(req, res);
+     router.get("/get-po-orded", function(req, res){
+    	controllers.getPOOrded(req, res);
+    });
+
+    router.get("/get-po-done", function(req, res){
+    controllers.getPODone(req, res);
+    });
+
+    router.get("/get-po-approved", function(req, res){
+    controllers.getPOApproved(req, res);
+    });
+
+    router.post("/get-user-po", function(req, res){
+    controllers.getUserPO(req, res);
     });
 
   }

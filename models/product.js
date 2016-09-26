@@ -12,7 +12,8 @@ module.exports = function(mongoose){
      	}],
 		activities: [String],
 		price: String,
-		ETC: String
+		ETC: String,
+		type: { type: String, default: 'photo' } //Pode ser foto ou blueprint 
 		
 	});
 

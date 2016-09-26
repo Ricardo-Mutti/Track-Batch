@@ -20,16 +20,24 @@ module.exports = function (schema){
        });
     },
 
-    getMachine: function(req, res){
+    getMachineList: function(req, res){
 
-       Machine.findOne({machineName: req.body.machineName}, function(err,machine){
-        if (err) throw err;
-        if(machine){
-          return res.json({success: true, message: "Machine found", response: {machine}});
-        }else{
-          return res.json({success: false, message: 'Machine not registered'});
-         }
-       });
+         var removeFields = {//Só retorna os campos necessarios
+                       _id: 0,
+                       __v:0,
+                   }
+
+     Machine.find({},removeFields, function(err,machine){//Tem que colocar uma query vazia se não ele acha que o removeFields é a query
+      if (err) throw err;
+      if(machine){
+        return res.json({success: true, message: "Machines found", response: {machine}});
+      }else{
+        return res.json({success: false, message: 'No machines not registered'});
+       }
+     });
     }
+
+
+
   }
 }

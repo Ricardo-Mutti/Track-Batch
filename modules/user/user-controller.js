@@ -20,16 +20,13 @@ return {
 	
 	getUser: function(req, res){
 
-		var query = {};
-       if (req.body.role){
-		query.role = req.body.role;
-        User.find(query, function(err, users){
+        User.find({role: "client"}, function(err, users){
           if (err) throw err;
           if (users){
             return res.json({success: true, message: 'Users Array!', response: {users: users}});
           }else return res.json({success: false, message: '0 Users found!'});
         })
-      }else return res.json({success: false, message: 'Missing parameters!'});
+      
 	}
 
 

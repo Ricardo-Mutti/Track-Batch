@@ -11,6 +11,10 @@ module.exports = function (modulePO){
     	controllers.getProduct(req, res);
     });
 
+    router.get("/get-blueprints", function(req, res){
+      controllers.getBlueprints(req, res);
+    });
+
     router.post("/edit-product", function(req, res){
     	controllers.editProduct(req, res);
     });
