@@ -7,8 +7,8 @@ return {
     editUser: function (req, res) {
       var query = {};
       var update = req.body;
-      if (req.body.email){
-        query.email = req.body.email;
+      if (req.body._id){
+        query._id = req.body._id;
         User.findOneAndUpdate(query, update, {new: true}, function(err, user){
           if (err) throw err;
           if (user){

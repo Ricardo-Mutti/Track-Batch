@@ -13,11 +13,15 @@ module.exports = function(schema) {
       batch.qnt = qnt;
       batch.POID = POID;
       batch.batchStatus = 'ready';
-      var newBatch = new Batch(batch); //Aqui converte pra variavel que vai ser salva no bacno Batch
-      //O retorno desse encpoint junta as informaçoes de duas tabelas, a de batch e a de produtos
+
+      var newBatch = new Batch(batch); //Aqui converte pra variavel que vai ser salva no banco Batch
+      newBatch.save(function(err){if (err) throw  err;});
+      //O retorno desse endpoint junta as informaçoes de duas tabelas, a de batch e a de produtos
       batch.ETC = product.ETC;
       batch.price = product.price;
       batch.activities = product.activities;
+
+
 
       return batch;
   }
