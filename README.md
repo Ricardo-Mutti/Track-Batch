@@ -115,6 +115,7 @@ com Homebrew
     db.TABLE_NAME.find()  - Mostra a tabela
     db.TABLE_NAME.save({nome:"teste"}) - Grava informações na tabela
     db.dropDatabase() - Apaga o banco inteiro, tem que dar use nome_db de novo
+    db.collectionName.drop() - Apaga "tabela"
 ### Acesso remoto do mongodb 
 
     Caso o banco esteja rodando em uma máquina que está conectada na sua rede, basta ir no arquivo config.js
