@@ -13,10 +13,6 @@
     ssh -i TCC-Backend/resources/tcc.pem ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
     ssh -N -L 8888:127.0.0.1:80 -i TCC-Backend/resources/tcc.pem ubuntu@ec2-52-38-92-76.us-west-2.compute.amazonaws.com
     
-    Usuários do rockMongo
-    User: root
-    Password: qzAlt35ARo0e
-
     Comando pra atualizar o usuário como manager:
     db.users.update({"_id": ObjectId("57ba3298d46da4a923fba422")}, {$set: {"role": "manager"}})
 
