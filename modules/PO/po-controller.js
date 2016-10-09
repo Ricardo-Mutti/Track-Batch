@@ -4,7 +4,8 @@ module.exports = function(schema) {
   var Batch = schema.batch;
   var Product = schema.product;
   var POID;
-  var batches = [];
+  var batches = [];//Essas variaveis precisam ser globais por causa do asincronismo das query
+  var size = 0;
 
   function createBatch(product, qnt) { //Função pra criar um batch a partir do subproduto
 
@@ -21,12 +22,10 @@ module.exports = function(schema) {
       batch.price = product.price;
       batch.activities = product.activities;
 
-
-
       return batch;
   }
 
-  function searchSubProduct(productName, qnt, res, size) { //Função recursiva pra chegar nos produtos primários. 
+  function searchSubProduct(productName, qnt, res) { //Função recursiva pra chegar nos produtos primários. 
       // Repare que a qnt se mutiplica. Se o prod A precisa de 1 prod B e 4 prod C então se na ordem temos 9 prod A 
       // temos entao -> 9 prod A = 9 pro B + 36 prod C. Esse são os batches a serem produzidos.
 
@@ -37,9 +36,16 @@ module.exports = function(schema) {
         
                   batches.push(createBatch(product, qnt));
                   // console.dir(JSON.stringify(batches));
+                  console.dir("BatchName" + product.productName.toString());
+                  console.dir("length: " + batches.length.toString());
+                  console.dir("size: " + size.toString());
                   if (batches.length == size) {
-                      return res.json({ success: true, message: 'Batches', response: { batches } });
-                      size = 0;
+                      // size = 0;
+                      var localBatches = batches.splice(0,batches.length);
+                      size=0;
+                      // localBatches = batches;
+                      // batches.length = 0;
+                      return res.json({ success: true, message: 'Batches', response: { localBatches } });
                   }
 
               } else {
@@ -47,7 +53,10 @@ module.exports = function(schema) {
                   //    |-B
                   // A -|-C      array de size um vira size 3
                   //    |-D
+                  console.dir("name: " + productName.toString());
+                  // console.dir("sizeName: "+(size + product.subProduct.length-1).toString());
                   size = size + product.subProduct.length-1;
+
                   for (var index = 0; index < product.subProduct.length; index++) {
                       searchSubProduct(product.subProduct[index].productName, (product.subProduct[index].qnt) * (qnt), res, size);
                   }
@@ -75,7 +84,8 @@ module.exports = function(schema) {
               if (PO) {
                   POID = req.body._id;
                   for (var index = 0; index < PO.orders.length; index++) { //Vai explodir as PO nos diversos produtos
-                      searchSubProduct(PO.orders[index].productName, PO.orders[index].qnt, res, PO.orders.length);
+                    size= PO.orders.length;
+                      searchSubProduct(PO.orders[index].productName, PO.orders[index].qnt, res);
                   }
               } else {
                   return res.json({ success: false, message: 'Cannot approve. PO dont exist!' });

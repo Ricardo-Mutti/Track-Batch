@@ -51,8 +51,15 @@ module.exports = function (schema){
         if (err) throw err;
           return res.json({success: true, message: 'Finished batches founded', response: {batches}});  
        });
-    }
+    },
 
+    startBatchProduction: function(req, res){
+
+       Batch.findOneAndUpdate(res.body, { 'batchStatus': 'started'}, { new: true },function(err,batches){
+        if (err) throw err;
+          return res.json({success: true, message: 'Batch production started'});  
+       });
+    }
 
   }
 }
